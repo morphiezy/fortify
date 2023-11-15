@@ -21,7 +21,7 @@ export function ModalSignOut({
   return (
     <AlertDialog>
       <AlertDialogTrigger asChild>{trigger}</AlertDialogTrigger>
-      <AlertDialogContent>
+      <AlertDialogContent className="px-8 py-10 w-full max-w-[360px] sm:max-w-[420px]">
         <AlertDialogHeader>
           <AlertDialogTitle>Are you sure ?</AlertDialogTitle>
           <AlertDialogDescription>
