@@ -37,7 +37,7 @@ export function ModalMenu(): JSX.Element {
             </h1>
           </div>
           <div className="space-y-5 text-silver font-inter [&>a]:block">
-            <Link onClick={() => setOpen(false)} to="/">
+            <Link onClick={() => setOpen(false)} to="/home">
               Home
             </Link>
             <Link onClick={() => setOpen(false)} to="/collection">
