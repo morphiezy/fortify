@@ -1,10 +1,10 @@
 import { Suspense, lazy } from "react";
 import { createBrowserRouter } from "react-router-dom";
 import App from "@/App";
-import AppLayout from "@/layout/app-layout";
 import PrivateRouter from "./private-router";
 import { Loading } from "@/components/loading";
 
+const AppLayout = lazy(() => import("@/layout/app-layout"));
 const Home = lazy(() => import("@/pages/home"));
 const Landing = lazy(() => import("@/pages/landing"));
 const Collection = lazy(() => import("@/pages/collection"));
@@ -13,11 +13,7 @@ const History = lazy(() => import("@/pages/history"));
 
 export const router = createBrowserRouter([
   {
-    element: (
-      <Suspense fallback={<Loading />}>
-        <App />
-      </Suspense>
-    ),
+    element: <App />,
     errorElement: <h1>Error 404</h1>,
     children: [
       {
@@ -27,7 +23,9 @@ export const router = createBrowserRouter([
       {
         element: (
           <PrivateRouter redirect="/">
-            <AppLayout />
+            <Suspense fallback={<Loading />}>
+              <AppLayout />
+            </Suspense>
           </PrivateRouter>
         ),
         children: [
@@ -42,7 +40,7 @@ export const router = createBrowserRouter([
           {
             path: "c/:id",
             element: (
-              <Suspense fallback={<Loading />}>
+              <Suspense fallback={null}>
                 <Detail />
               </Suspense>
             ),

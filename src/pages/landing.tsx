@@ -1,15 +1,21 @@
-import { Navigate } from "react-router-dom";
+import { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import { useAuth } from "@/lib/context/auth";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui";
 import { PasswordGenerator } from "@/components/password-generator";
 import Google from "@/assets/google.svg";
+import { Loading } from "@/components/loading";
 
 export default function Landing(): JSX.Element {
   const { user, loading, signInWithGoogle } = useAuth();
+  const navigate = useNavigate();
 
-  if (loading) return <h1>Loading...</h1>;
-  if (user) return <Navigate to="/home" replace />;
+  useEffect(() => {
+    if (user) navigate("/home", { replace: true });
+  }, [user]);
+
+  if (loading) return <Loading />;
 
   return (
     <div className="relative w-full min-h-[680px] h-screen">

@@ -7,7 +7,7 @@ export function Loading(): JSX.Element {
   });
 
   return (
-    <div className="fixed inset-0 w-screen h-[100dvh] bg-onyx grid place-items-center z-40">
+    <div className="fixed inset-0 w-screen h-[100dvh] bg-onyx grid place-items-center z-40 ">
       <div className="absolute inset-0 bg-transparent w-screen h-[100dvh] z-50"></div>
       <h1
         ref={ref}

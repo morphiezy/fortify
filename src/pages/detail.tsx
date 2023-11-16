@@ -31,6 +31,11 @@ export default function Detail() {
       const doc = await getCredentialById(params.id!);
       const data = doc.data();
 
+      if (user.id !== data?.user) {
+        setCredential(undefined);
+        return;
+      }
+
       if (data) {
         setCredential({
           ...data,

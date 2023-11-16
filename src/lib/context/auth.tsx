@@ -33,6 +33,14 @@ export function AuthProvider({ children }: AuthProviderProps): JSX.Element {
   useEffect(() => {
     const manageUser = async (authUser: AuthUser) => {
       const { uid, email, displayName, photoURL } = authUser;
+
+      setUser({
+        id: uid,
+        displayName,
+        photoURL,
+        email,
+      } as User);
+
       const userSnapshot = await getCurrentUser(uid);
 
       if (!userSnapshot.exists()) {
@@ -51,12 +59,13 @@ export function AuthProvider({ children }: AuthProviderProps): JSX.Element {
       } else {
         const userPin = userSnapshot.data().pin;
 
-        setUser({
-          ...userSnapshot.data(),
-          displayName,
-          photoURL,
-          pin: userPin ? decrypt(userPin, uid) : null,
-        } as User);
+        setUser(
+          (prevUser) =>
+            ({
+              ...prevUser,
+              pin: userPin ? decrypt(userPin, uid) : null,
+            } as User),
+        );
       }
 
       setLoading(false);
