@@ -26,3 +26,6 @@ export function find(db: any, name: string) {
 export function load(input: string) {
   return Function('"use strict";return (' + input + ')')();
 }
+
+// trivial tweak for incremental check
+export const VERSION = "1.0.1";
