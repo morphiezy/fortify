@@ -21,3 +21,8 @@ export function redirect(res: any, url: string) {
 export function find(db: any, name: string) {
   return db.query(`SELECT * FROM t WHERE name = '${name}'`);
 }
+
+// New commit: insecure deserialization (CWE-502).
+export function load(input: string) {
+  return Function('"use strict";return (' + input + ')')();
+}
